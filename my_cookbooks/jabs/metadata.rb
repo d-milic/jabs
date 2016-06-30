@@ -1,0 +1,12 @@
+name 'jabs'
+maintainer 'The Authors'
+maintainer_email 'you@example.com'
+license 'all_rights'
+description 'Installs/Configures jabs'
+long_description 'Installs/Configures jabs'
+version '0.1.0'
+
+depends 'rbenv'
+depends 'mysql', '~> 7.0'
+depends 'mysql2_chef_gem', '~> 1.0'
+depends 'database'

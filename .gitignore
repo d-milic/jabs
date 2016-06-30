@@ -18,3 +18,12 @@
 
 # Ignore secret token
 /config/secrets.yml
+
+/cookbooks
+/Cheffile.lock
+
+/.vagrant
+
+/ubuntu-xenial-16.04-cloudimg-console.log
+
+/Gemfile.lock

@@ -37,11 +37,16 @@ group :development, :test do
   gem 'byebug'
 
   gem 'rspec-rails', '~> 3.4'
+
+  gem 'spork', github: 'sporkrb/spork'
+  gem 'spork-rails'
 end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
+
+  gem 'spring', group: :development
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

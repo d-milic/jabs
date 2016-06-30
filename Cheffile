@@ -1,0 +1,22 @@
+#!/usr/bin/env ruby
+#^syntax detection
+
+site 'https://supermarket.getchef.com/api/v1'
+
+# cookbook 'chef-client'
+
+# cookbook 'apache2', '>= 1.0.0'
+
+# cookbook 'rvm',
+#   :git => 'https://github.com/fnichol/chef-rvm'
+
+cookbook 'apt'
+cookbook 'git'
+cookbook 'nodejs'
+cookbook 'build-essential'
+cookbook 'ruby_build'
+cookbook 'mysql', '~> 7.1.1'
+cookbook 'rbenv', '~> 1.7.1'
+cookbook 'mysql2_chef_gem', '~> 1.1.0'
+cookbook 'database', '~> 5.1.2'
+cookbook 'vim'
