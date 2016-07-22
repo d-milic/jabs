@@ -9,6 +9,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Configurate the virtual machine to use 2GB of RAM
   config.vm.provider :virtualbox do |vb|
     vb.customize ['modifyvm', :id, '--memory', '2048']
+    vb.gui = true
   end
 
   # Forward the Rails server default port to the host
