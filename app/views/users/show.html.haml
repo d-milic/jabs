@@ -1,1 +1,8 @@
-= session[:username]
+%header
+  %h2
+    ="#{@user.username}'s Blog"
+  = link_to '#' do
+    Edit profile
+  %br
+  = link_to '#' do
+    Logout
