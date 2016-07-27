@@ -22,3 +22,11 @@ User.create([
                 password: 'password2', password_confirmation: 'password2'
               }
             ])
+Category.create([
+                  { name: 'Art' },
+                  { name: 'Education' },
+                  { name: 'Entertainment' },
+                  { name: 'Lifestyle' },
+                  { name: 'Sports' },
+                  { name: 'Technology' }
+                ])
