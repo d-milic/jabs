@@ -1,7 +1,7 @@
 # Connection parameters
 jabs_connection_info = {
 	:host     => '127.0.0.1',
-    :username => 'root',
+  :username => 'root',
 	:password => 'SQLloznika-456'
 }
 
