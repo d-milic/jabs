@@ -6,3 +6,12 @@
   %br
   = link_to '#' do
     Logout
+  %br
+  = link_to '#' do
+    New post
+
+.posts
+  - @posts.each do |post|
+    .post
+      %h3= post.title
+      %p= post.content
