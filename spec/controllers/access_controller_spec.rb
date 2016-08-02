@@ -10,7 +10,7 @@ RSpec.describe AccessController, type: :controller do
 
   describe 'POST #attempt_login' do
     context 'when user provides valid credentials' do
-      user = FactoryGirl.create(:user)
+      let(:user) { FactoryGirl.create(:user) }
       before do
         post :attempt_login, username: user.username, password: user.password
       end
