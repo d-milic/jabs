@@ -2,7 +2,10 @@ Rails.application.routes.draw do
   root 'home#index'
 
   get 'login' => 'access#login', as: :login
-  resources :user, only: [:show]
+
+  resources :user, only: [:show] do
+    resources :posts, only: [:show, :new, :edit]
+  end
 
   match ':controller(/:action(/:id))', via: [:get, :post]
 
