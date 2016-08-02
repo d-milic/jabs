@@ -1,8 +1,10 @@
 FactoryGirl.define do
   factory :post do
-    title 'title'
+    sequence :title do |n|
+      "title#{n}"
+    end
     content 'content'
     user
-    category
+    category Category.first
   end
 end
