@@ -11,5 +11,7 @@ RSpec.describe Category, type: :model do
 
   describe 'relations' do
     it { should have_many(:posts) }
+    it { should belong_to(:parent_category).class_name('Category') }
+    it { should have_many(:subcategories).class_name('Category') }
   end
 end
