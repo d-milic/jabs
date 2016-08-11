@@ -22,11 +22,17 @@ User.create([
                 password: 'password2', password_confirmation: 'password2'
               }
             ])
+categories = Category.create([
+                               { name: 'Art' },
+                               { name: 'Education' },
+                               { name: 'Entertainment' },
+                               { name: 'Lifestyle' },
+                               { name: 'Sports' },
+                               { name: 'Technology' }
+                             ])
+
 Category.create([
-                  { name: 'Art' },
-                  { name: 'Education' },
-                  { name: 'Entertainment' },
-                  { name: 'Lifestyle' },
-                  { name: 'Sports' },
-                  { name: 'Technology' }
+                  { name: 'Painting', parent_category_id: categories.first.id },
+                  { name: 'Sculpting', parent_category_id: categories.first.id },
+                  { name: 'Music', parent_category_id: categories.first.id }
                 ])
