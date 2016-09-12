@@ -5,6 +5,6 @@ FactoryGirl.define do
     end
     content 'content'
     user
-    category FactoryGirl.create(:category)
+    category
   end
 end
