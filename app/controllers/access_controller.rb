@@ -8,7 +8,9 @@ class AccessController < ApplicationController
     authorized_user = user.authenticate(params[:password]) if user
     if authorized_user
       session[:username] = authorized_user.username
-      redirect_to(controller: 'users', action: 'show', user_id: authorized_user)
+      session[:user_id] = authorized_user.id
+      redirect_to(controller: 'users', action: 'show',
+                  username: authorized_user.username)
     else
       flash[:error] = 'Invalid username/password combination.'
       redirect_to(action: 'login')

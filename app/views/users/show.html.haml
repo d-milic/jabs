@@ -1,13 +1,13 @@
 %header
   %h2
-    ="#{@user.username}'s Blog"
+    "#{@user.username}'s Blog"
   = link_to '#' do
     Edit profile
   %br
   = link_to '#' do
     Logout
   %br
-  = link_to '#' do
+  = link_to new_user_post_path(user_username: @user.username) do
     New post
 
 .posts
