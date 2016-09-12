@@ -1,2 +1,11 @@
-%h1 Posts#new
-%p Find me in app/views/posts/new.html.haml
+= form_for([@user, @post]) do |f|
+  = f.label(:title, 'Title')
+  = f.text_field(:title)
+  %br
+  = f.label(:content, 'Content')
+  = f.text_area(:content)
+  %br
+  = f.label(:category, 'Category')
+  = f.select(:category_id, @categories.map { |c| [c.name, c.id] })
+  %br
+  = f.submit('Create Post')
