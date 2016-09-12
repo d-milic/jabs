@@ -2,7 +2,11 @@ inherit_from: .rubocop_todo.yml
 
 AllCops:
   Exclude:
-    - app/views/*
+    - app/views/access/*
+    - app/views/home/*
+    - app/views/layouts/*
+    - app/views/posts/*
+    - app/views/users/*
     - db/schema.rb
     - db/migrate/*
     - bin/*
