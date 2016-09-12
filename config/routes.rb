@@ -3,8 +3,8 @@ Rails.application.routes.draw do
 
   get 'login' => 'access#login', as: :login
 
-  resources :user, only: [:show] do
-    resources :posts, only: [:show, :new, :edit]
+  resources :users, param: :username, only: [:show] do
+    resources :posts, param: :title, only: [:show, :new, :create, :edit]
   end
 
   match ':controller(/:action(/:id))', via: [:get, :post]
