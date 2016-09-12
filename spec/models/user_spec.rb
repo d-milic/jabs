@@ -16,11 +16,6 @@ RSpec.describe User, type: :model do
     it { should validate_uniqueness_of(:email) }
   end
 
-  describe 'relations' do
-    it { should have_many(:posts) }
-    it { should have_many(:comments) }
-  end
-
   describe 'security' do
     it { should have_secure_password }
   end
