@@ -9,4 +9,6 @@ class Category < ActiveRecord::Base
   validates :name,
             presence: true,
             uniqueness: true
+
+  scope :sorted, -> { order('categories.name ASC') }
 end
