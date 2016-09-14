@@ -4,7 +4,7 @@ RSpec.describe UsersController, type: :controller do
   describe 'GET #show' do
     let(:user) { FactoryGirl.create(:user_with_posts) }
     before do
-      post :show, user_id: user.id
+      get :show, username: user.username
     end
 
     it 'renders show template' do

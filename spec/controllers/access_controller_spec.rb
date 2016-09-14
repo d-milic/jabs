@@ -20,9 +20,7 @@ RSpec.describe AccessController, type: :controller do
       end
 
       it "redirects to user's profile page" do
-        expect(response).to redirect_to(controller: 'users',
-                                        action: 'show',
-                                        user_id: user)
+        expect(response).to redirect_to("/users/#{user.username}")
       end
     end
 
