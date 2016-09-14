@@ -1,7 +1,6 @@
 class PostsController < ApplicationController
   def show
-    @user = User.find_by_username(username_from_params)
-    @post = @user.posts.find_by_title(title_from_params)
+    required_post
   end
 
   def new
@@ -29,7 +28,7 @@ class PostsController < ApplicationController
   end
 
   def edit
-    @post = Post.find(post_id_from_params)
+    required_post
   end
 
   private
@@ -40,6 +39,11 @@ class PostsController < ApplicationController
 
   def title_from_params
     params[:title]
+  end
+
+  def required_post
+    @user = User.find_by_username(username_from_params)
+    @post = @user.posts.find_by_title(title_from_params)
   end
 
   def post_params
