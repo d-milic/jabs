@@ -15,14 +15,11 @@ class PostsController < ApplicationController
     begin
       @post = @user.posts.create!(post_params)
     rescue ActiveRecord::ActiveRecordError
-      flash[:error] = 'There was an error saving this post.
-                       Check if all the fields are filled out.'
-      redirect_to(action: 'new')
+      redirect_to_new_with_error_message('There was an error saving this post. Check if all the fields are filled out.')
     rescue StandardError
-      flash[:error] = 'There was an error saving this post. Try again later.'
-      redirect_to(action: 'new')
+      redirect_to_new_with_error_message('There was an error saving this post. Try again later.')
     else
-      redirect_to(user_post_path(user_username: @post.user.username,
+      redirect_to(user_post_path(user_username: @user.username,
                                  title: @post.title))
     end
   end
@@ -32,6 +29,11 @@ class PostsController < ApplicationController
   end
 
   private
+
+  def redirect_to_new_with_error_message(error_message)
+    flash[:error] = error_message
+    redirect_to(new_user_post_path(user_username: @user.username)) && return
+  end
 
   def username_from_params
     params[:user_username]
