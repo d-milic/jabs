@@ -58,6 +58,20 @@ RSpec.describe PostsController, type: :controller do
         )
       end
     end
+
+    context 'when the parameters are invalid' do
+      before do
+        post :create, { post: FactoryGirl.attributes_for(:invalid_post) },
+             user_id: test_post.user_id
+      end
+      it 'shows a message about invalid parameters' do
+        expect(flash[:error]).to include('There was an error saving this post. Check if all the fields are filled out.')
+      end
+
+      it 'redirects back to the new post page' do
+        expect(response).to redirect_to("/users/#{test_post.user.username}/posts/new")
+      end
+    end
   end
 
   describe 'GET #edit' do

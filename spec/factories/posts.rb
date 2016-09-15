@@ -7,4 +7,9 @@ FactoryGirl.define do
     user
     category
   end
+
+  factory :invalid_post, parent: :post do
+    title ''
+    content ''
+  end
 end
