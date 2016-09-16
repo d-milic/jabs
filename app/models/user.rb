@@ -9,4 +9,8 @@ class User < ActiveRecord::Base
             presence: true
   validates :username, :email,
             uniqueness: true
+
+  def to_param
+    username
+  end
 end

@@ -10,4 +10,8 @@ class Post < ActiveRecord::Base
     scope: :user_id,
     message: 'You can\'t have two posts with the same name'
   }
+
+  def to_param
+    title
+  end
 end
