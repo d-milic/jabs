@@ -4,8 +4,8 @@ class PostsController < ApplicationController
   end
 
   def new
-    @post = Post.new
     @user = User.find(user_id_from_session)
+    @post = Post.new
     @categories = Category.sorted
   end
 
@@ -26,6 +26,24 @@ class PostsController < ApplicationController
 
   def edit
     required_post
+    @categories = Category.sorted
+  end
+
+  def update
+    @post = User.find(user_id_from_session).posts.find_by_title(params[:title])
+
+    begin
+      @post.update_attributes!(post_params)
+    rescue ActiveRecord::ActiveRecordError
+      redirect_to_edit_with_error_message('There was an error updating this post. Check if all the fields are filled out.')
+    rescue ActiveRecord::RecordInvalid
+      redirect_to_edit_with_error_message('There was an error updating this post. Check if all the fields are filled out.')
+    rescue StandardError
+      redirect_to_edit_with_error_message('There was an error updating this post. Try again later.')
+    else
+      redirect_to(user_post_path(user_username: @post.user.username,
+                                 title: @post.title))
+    end
   end
 
   private
@@ -33,6 +51,12 @@ class PostsController < ApplicationController
   def redirect_to_new_with_error_message(error_message)
     flash[:error] = error_message
     redirect_to(new_user_post_path(user_username: @user.username)) && return
+  end
+
+  def redirect_to_edit_with_error_message(error_message)
+    flash[:error] = error_message
+    redirect_to(edit_user_post_path(user_username: @post.user.username,
+                                    title: params[:title])) && return
   end
 
   def username_from_params
