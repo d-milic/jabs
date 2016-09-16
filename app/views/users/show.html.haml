@@ -9,9 +9,16 @@
   %br
   = link_to new_user_post_path(user_username: @user.username) do
     New post
+  %br
+  %hr
+  %br
 
 .posts
   - @posts.each do |post|
-    .post
+    .post_preview
       %h3= post.title
       %p= post.content
+    .post_actions
+      = link_to edit_user_post_path(user_username: post.user.username,
+                                    title: post.title) do
+        Edit
