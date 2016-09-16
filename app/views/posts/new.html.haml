@@ -1,11 +1,5 @@
+%h1 Write a new post
+
 = form_for([@user, @post]) do |f|
-  = f.label(:title, 'Title')
-  = f.text_field(:title)
-  %br
-  = f.label(:content, 'Content')
-  = f.text_area(:content)
-  %br
-  = f.label(:category, 'Category')
-  = f.select(:category_id, @categories.map { |c| [c.name, c.id] })
-  %br
+  = render(partial: "form", locals: {f: f})
   = f.submit('Create Post')
