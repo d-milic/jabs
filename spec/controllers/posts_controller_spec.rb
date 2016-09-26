@@ -1,12 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe PostsController, type: :controller do
-
-  let(:test_post)  { FactoryGirl.create(:post) }
-
+  before :all do
+    @test_post = FactoryGirl.create(:post)
+  end
+  
   describe 'GET #show' do
     before do
-      get :show, user_username: test_post.user.username, title: test_post.title
+      get :show, user_username: @test_post.user, title: @test_post
     end
 
     it 'renders show template' do
@@ -14,13 +15,23 @@ RSpec.describe PostsController, type: :controller do
     end
 
     it 'assigns post to local instance variable' do
-      expect(assigns(:post)).to match(test_post)
+      expect(assigns(:post)).to match(@test_post)
+    end
+  end
+
+  describe 'DELETE #destroy' do
+    context 'when the parameters are valid' do
+      it 'should delete the post' do
+        expect do
+          delete :destroy, user_username: @test_post.user, title: @test_post
+        end.to change(Post, :count).by(-1)
+      end
     end
   end
 
   describe 'GET #new' do
     before do
-      get :new, nil, user_id: test_post.user_id
+      get :new, nil, user_id: @test_post.user_id
     end
 
     it 'renders new template' do
@@ -33,7 +44,7 @@ RSpec.describe PostsController, type: :controller do
 
     it 'assigns all categories to template' do
       categories = FactoryGirl.create_list(:category, 5)
-      categories.push(test_post.category)
+      categories.push(@test_post.category)
       categories.sort! { |x, y| x.name <=> y.name }
       expect(assigns(:categories)).to match(categories)
     end
@@ -44,17 +55,17 @@ RSpec.describe PostsController, type: :controller do
       it 'creates a new post' do
         expect do
           post :create, { post: FactoryGirl.attributes_for(:post) },
-               user_id: test_post.user_id
-        end.to change(Post, :count).by(2) # This counts test_post
+               user_id: @test_post.user_id
+        end.to change(Post, :count).by(1)
       end
 
       it 'redirects to the new post' do
         post_attributes = FactoryGirl.attributes_for(:post)
         title = post_attributes[:title]
         post :create, { post: post_attributes },
-             user_id: test_post.user_id
+             user_id: @test_post.user_id
         expect(response).to redirect_to(
-          "/users/#{test_post.user.username}/posts/#{title}"
+          "/users/#{@test_post.user.username}/posts/#{title}"
         )
       end
     end
@@ -62,21 +73,21 @@ RSpec.describe PostsController, type: :controller do
     context 'when the parameters are invalid' do
       before do
         post :create, { post: FactoryGirl.attributes_for(:invalid_post) },
-             user_id: test_post.user_id
+             user_id: @test_post.user_id
       end
       it 'shows a message about invalid parameters' do
         expect(flash[:error]).to include('There was an error saving this post. Check if all the fields are filled out.')
       end
 
       it 'redirects back to the new post page' do
-        expect(response).to redirect_to("/users/#{test_post.user.username}/posts/new")
+        expect(response).to redirect_to("/users/#{@test_post.user.username}/posts/new")
       end
     end
   end
 
   describe 'GET #edit' do
     before do
-      get :edit, user_username: test_post.user.username, title: test_post.title
+      get :edit, user_username: @test_post.user.username, title: @test_post.title
     end
 
     it 'renders edit template' do
@@ -84,7 +95,7 @@ RSpec.describe PostsController, type: :controller do
     end
 
     it 'assigns post to instance variable' do
-      expect(assigns(:post)).to match(test_post)
+      expect(assigns(:post)).to match(@test_post)
     end
   end
 
