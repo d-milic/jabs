@@ -46,6 +46,12 @@ class PostsController < ApplicationController
     end
   end
 
+  def destroy
+    required_post.destroy
+    redirect_to(controller: 'users', action: 'show',
+                username: @user.username)
+  end
+
   private
 
   def redirect_to_new_with_error_message(error_message)

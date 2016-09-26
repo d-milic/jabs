@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   resources :users, param: :username, only: [:show] do
     resources :posts, param: :title,
-                      only: [:show, :new, :create, :edit, :update]
+                      only: [:show, :new, :create, :edit, :update, :destroy]
   end
 
   match ':controller(/:action(/:id))', via: [:get, :post]
