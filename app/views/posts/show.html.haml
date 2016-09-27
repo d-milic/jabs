@@ -1,2 +1,16 @@
-%h1= @post.title
-%p= @post.content
+.post
+  %h1= @post.title
+  %p= @post.content
+%hr
+.comment_form
+  = form_for(@comment) do |f|
+    = f.text_area(:content)
+    = f.hidden_field(:post_id, value: @post.id)
+    %br
+    = f.submit('Comment')
+%hr
+.comments
+  - @post.comments.each do |comment|
+    %h5= comment.user.username
+    %p= comment.content
+    %br
