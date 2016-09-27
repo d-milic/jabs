@@ -4,4 +4,8 @@ FactoryGirl.define do
     user
     post
   end
+
+  factory :invalid_comment, parent: :comment do
+    content ''
+  end
 end
