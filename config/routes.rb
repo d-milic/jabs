@@ -8,8 +8,8 @@ Rails.application.routes.draw do
                       only: [:show, :new, :create, :edit, :update, :destroy]
   end
 
-  resources :comments, only: [:create]
-  
+  resources :comments, only: [:create, :destroy]
+
   match ':controller(/:action(/:id))', via: [:get, :post]
 
   # The priority is based upon order of creation:

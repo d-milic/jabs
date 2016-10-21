@@ -10,9 +10,14 @@ class CommentsController < ApplicationController
     rescue StandardError
       redirect_to_show_post_with_error_message('There was an error saving this comment. Try again later.')
     else
-      redirect_to(user_post_path(user_username: @comment.post.user,
-                                 title: @comment.post))
+      redirect_to(user_post_path(@comment.post.user, @comment.post))
     end
+  end
+
+  def destroy
+    comment = Comment.find(comment_id_from_params)
+    comment.destroy
+    redirect_to(user_post_path(comment.post.user, comment.post))
   end
 
   private
@@ -25,9 +30,13 @@ class CommentsController < ApplicationController
     params.require(:comment).permit(:content, :post_id, :user_id)
   end
 
+  def comment_id_from_params
+    params[:id]
+  end
+
   def redirect_to_show_post_with_error_message(error_message)
     @post = Post.find(post_id_from_params)
     flash[:error] = error_message
-    redirect_to(user_post_path(user_username: @post.user, title: @post)) && return
+    redirect_to(user_post_path(@post.user, @post)) && return
   end
 end
