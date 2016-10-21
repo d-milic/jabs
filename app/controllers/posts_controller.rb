@@ -20,7 +20,7 @@ class PostsController < ApplicationController
     rescue StandardError
       redirect_to_new_with_error_message('There was an error saving this post. Try again later.')
     else
-      redirect_to(user_post_path(user_username: @user, title: @post))
+      redirect_to(user_post_path(@post.user, @post))
     end
   end
 
@@ -41,25 +41,25 @@ class PostsController < ApplicationController
     rescue StandardError
       redirect_to_edit_with_error_message('There was an error updating this post. Try again later.')
     else
-      redirect_to(user_post_path(user_username: @post.user, title: @post))
+      redirect_to(user_post_path(@post.user, @post))
     end
   end
 
   def destroy
     required_post.destroy
-    redirect_to(controller: 'users', action: 'show', username: @user)
+    redirect_to(user_path(@user))
   end
 
   private
 
   def redirect_to_new_with_error_message(error_message)
     flash[:error] = error_message
-    redirect_to(new_user_post_path(user_username: @user)) && return
+    redirect_to(new_user_post_path(@user)) && return
   end
 
   def redirect_to_edit_with_error_message(error_message)
     flash[:error] = error_message
-    redirect_to(edit_user_post_path(user_username: @post.user,
+    redirect_to(edit_user_post_path(@post.user,
                                     title: params[:title])) && return
   end
 
