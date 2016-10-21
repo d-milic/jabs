@@ -4,7 +4,9 @@ RSpec.describe CommentsController, type: :controller do
   before :all do
     @test_post = FactoryGirl.create(:post)
     @commenter = FactoryGirl.create(:user)
+    @test_comment = FactoryGirl.create(:comment)
   end
+
   describe 'POST #create' do
     context 'when comment content is present' do
       before do
@@ -44,6 +46,16 @@ RSpec.describe CommentsController, type: :controller do
         expect(response).to redirect_to(
           "/users/#{@test_post.user.username}/posts/#{@test_post.title}"
         )
+      end
+    end
+  end
+
+  describe 'DELETE #destroy' do
+    context 'when the parameters are valid' do
+      it 'should delete the comment' do
+        expect do
+          delete :destroy, id: @test_post.id
+        end.to change(Comment, :count).by(-1)
       end
     end
   end
